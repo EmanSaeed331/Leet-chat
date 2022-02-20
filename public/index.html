@@ -8,7 +8,12 @@
 </head>
 <body>
     <h1>Let's chat </h1>
-    <button id="increament">+1</button>
+    <div class = "container">
+        <form id="message-form">
+            <input placeholder="Message" name = "message">
+            <button id="sendbtn">Send</button>
+        </form>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chat.js"></script>
     
