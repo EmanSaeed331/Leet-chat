@@ -32,8 +32,13 @@ io.on('connection',(socket)=>{
      //   io.emit('countUpdated' , count) 
    // }) 
    io.emit('message',message)
+   socket.broadcast.emit('message','A new user has joined !' )
    socket.on('sendMessage',(message)=>{
         io.emit('message',message)
+   })
+   // disconnect is a built in Event
+   socket.on('disconnect' , ()=>{
+       io.emit('message',' A user has left !')
    })
    console.log(message)
 })
