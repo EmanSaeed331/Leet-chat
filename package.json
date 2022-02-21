@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/EmanSaeed331/Chat-App#readme",
   "dependencies": {
+    "bad-words": "^3.0.4",
     "env-cmd": "^10.1.0",
     "express": "^4.17.3",
     "nodemon": "^2.0.15",
