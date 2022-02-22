@@ -21,7 +21,7 @@ document.querySelector('#increament').addEventListener('click', ()=>{
 })
  */
 //Options
-
+const {username, room }=Qs.parse(location.search , {ignoreQueryPrefix:true})
 socket.on('message',(message)=>{
     console.log(message)
     const html = Mustache.render(messageTemplate,{
@@ -74,3 +74,4 @@ $messageForm .addEventListener('submit',(e) =>{
         })
     })
 })
+socket.emit('join' , { username,room })

@@ -34,14 +34,30 @@ io.on('connection',(socket)=>{
         /*(io.emit) emits the event to every single connection */
      //   io.emit('countUpdated' , count) 
    // }) 
-   socket.emit('message',generateMessage('Welcome!'))
-   socket.broadcast.emit('message',generateMessage('A new user has joined ! ') )
+  
+   /* ## methods from server to clients :
+        1- socket.emit --> this emits an event to specific client .
+        2- io.emit     --> this emits an event to every connected client .
+        3- socket.broadcast.emit --> this emits  an event to every connected client except this one . 
+   */ 
+    // setup room
+     /*
+        1- io.to.emit --> this emits an event to everybody in a specific room .
+        2- socket.broadcast.to.emit --> this emits an event for every one except this one .
+     */ 
+
+   socket.on('join' , ({username,room})=>{
+        socket.join(room)
+
+        socket.emit('message',generateMessage('Welcome!'))
+        socket.broadcast.to(room).emit('message',generateMessage(`${username} has joined!`) )
+   })
    socket.on('sendMessage',(message , callback)=>{
        const filter = new Filter()
        if(filter.isProfane(message)){
            return callback('Profanity is not allowed!')
        }
-        io.emit('message',generateMessage(message))
+        io.to('Egy').emit('message',generateMessage(message))
         callback()
    })
     socket.on('sendLocation' , (coords , callback)=>{
