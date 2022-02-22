@@ -23,13 +23,16 @@ document.querySelector('#increament').addEventListener('click', ()=>{
 socket.on('message',(message)=>{
     console.log(message)
     const html = Mustache.render(messageTemplate,{
-        message 
+        message:message.text ,
+        createdAt: moment(message.createdAt).format('hh:mm a')
     })
     $messages.insertAdjacentHTML('beforeend' , html)
 })
 socket.on('locationMessage' , (url)=>{
     const html = Mustache.render(locationMessageTemplate,{
-        url
+        url :url.url , 
+        createdAt: moment(url.createdAt).format('hh:mm a')
+
     })
     $messages.insertAdjacentHTML('beforeend', html)
 
