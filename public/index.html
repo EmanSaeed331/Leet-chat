@@ -8,6 +8,7 @@
 </head>
 <body>
     <h1>Let's chat </h1>
+    <div id="messages"></div>
     <div class = "container">
         <form id="message-form">
             <input placeholder="Message" name = "message">
@@ -15,6 +16,14 @@
         </form>
         <button id="send-location">Send Location </button>
     </div>
+    <script id="message-template" type="text/html">
+        <div>
+            <p>{{message}}</p>
+        </div>
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chat.js"></script>
     
