@@ -20,6 +20,8 @@ document.querySelector('#increament').addEventListener('click', ()=>{
     socket.emit('increament')
 })
  */
+//Options
+
 socket.on('message',(message)=>{
     console.log(message)
     const html = Mustache.render(messageTemplate,{
