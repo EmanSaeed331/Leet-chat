@@ -7,7 +7,7 @@ const $sendlocationButton = document.querySelector('#send-location')
 const $messages = document.querySelector('#messages')
 // Templates
 const messageTemplate = document.querySelector('#message-template').innerHTML
-
+const locationMessageTemplate = document.querySelector('#location-message-template').innerHTML
 /* - on accepts two things :
        1) the name of the event 
        2) the function to run when event occurs
@@ -26,6 +26,13 @@ socket.on('message',(message)=>{
         message 
     })
     $messages.insertAdjacentHTML('beforeend' , html)
+})
+socket.on('locationMessage' , (url)=>{
+    const html = Mustache.render(locationMessageTemplate,{
+        url
+    })
+    $messages.insertAdjacentHTML('beforeend', html)
+
 })
 $messageForm .addEventListener('submit',(e) =>{
         // (e.preventDefault()) --> to prevent default behavior  
