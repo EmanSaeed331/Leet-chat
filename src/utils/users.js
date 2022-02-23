@@ -33,13 +33,45 @@ const removeUser = (id)=>{
         return users.splice(index,1)[0]
     } 
 }
+//Get User
+const getUser = (id) =>{
+    return users.find((user)=> user.id === id)
+}
+ const getUsersInRoom = (room) =>{
+     room = room.trim().toLowerCase()
+     return users.filter((user)=>user.room === room)
+
+ }
 // check users
 addUser({
     id :22, 
     username:'Eman',
     room:'Egypt'
 })
-console.log(users)
-const re = removeUser(22)
- console.log(re)
- console.log(users)
+addUser({
+    id :2, 
+    username:'Eman2',
+    room:'Egypt'
+})
+addUser({
+    id :2, 
+    username:'Eman3',
+    room:'Egypt'
+})
+addUser({
+    id :2, 
+    username:'Eman4',
+    room:'Egypt'
+})
+const user = getUser(2);
+const usersInRoom = getUsersInRoom('Egypt')
+console.log(user)
+console.log(usersInRoom)
+/* const re = removeUser(22)
+ console.log(re) */
+ module.exports ={
+    addUser,
+    removeUser,
+    getUser,
+    getUsersInRoom
+ }
