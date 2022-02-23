@@ -6,13 +6,6 @@
 ```
 https://leet-chat.herokuapp.com/
 ```
-
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
-
-```bash
-pip install foobar
-```
-
 ## install
 Open a terminal window session, or the equivalent on your machine, and enter the following command to install all the Node modules needed to run the app:
 ```
