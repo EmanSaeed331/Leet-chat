@@ -50,11 +50,16 @@ io.on('connection',(socket)=>{
         2- socket.broadcast.to.emit --> this emits an event for every one except this one .
      */ 
 
-   socket.on('join' , ({username,room})=>{
-        socket.join(room)
+   socket.on('join' , (options,callback)=>{
+        const {error , user}=addUser({id:socket.id,...options })
+        if (error){ 
+             return callback(error)
+        }
+        socket.join(user.room)
 
         socket.emit('message',generateMessage('Welcome!'))
-        socket.broadcast.to(room).emit('message',generateMessage(`${username} has joined!`) )
+        socket.broadcast.to(user.room).emit('message',generateMessage(`${user.username} has joined!`) )
+        callback()
    })
    socket.on('sendMessage',(message , callback)=>{
        const filter = new Filter()
@@ -70,11 +75,12 @@ io.on('connection',(socket)=>{
     })
    // disconnect is a built in Event 
    socket.on('disconnect' , ()=>{
-       io.emit('message',generateMessage(' A user has left !'))
+       const user = removeUser(socket.id)
+       if(user){
+         io.to(user.room).emit('message',generateMessage(`${user.username} has left!`))
+       }
    })
 })
-
-
 server.listen(port , ()=>{
     console.log(`Server connected on port number ${port}`)
 })
